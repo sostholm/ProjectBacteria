@@ -1,10 +1,19 @@
 from datetime       import datetime
 from mongoengine    import Document
-from mongoengine    import DateTimeField, StringField
+from mongoengine    import (
+    DateTimeField, StringField, ReferenceField, ListField
+)
 
 
-class Bacteria(Document):
-    meta = {'collection': 'bacteria'}
+class Microbe(Document):
+    meta        = {'collection': 'bacteria'}
+    m_type      = StringField()
     species     = StringField()
     subspecies  = StringField()
     strain      = StringField()
+
+
+class Probiotic(Document):
+    meta = {'collection': 'probiotic'}
+    name = StringField()
+    bacteria = ListField(ReferenceField(Microbe))
