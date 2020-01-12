@@ -2,15 +2,9 @@ from mongoengine import connect
 
 from models import Microbe, Probiotic
 
-connect('ProjectProbiotic', host='mongomock://pine64', alias='default')
+connect('ProjectProbiotic', host='mongodb://pine64:27017')
 
 def init_db():
-    microbe = Microbe(name="Microbe")
-    microbe.save()
-
-    probiotic = Probiotic(name='Probiotic')
-    probiotic.save()
-
     bl = Microbe(
         m_type      ='bacteria',
         species     ='Bifidobacterium',
@@ -40,7 +34,7 @@ def init_db():
     blong.save()
     ba.save()
 
-    pb = Microbe(
+    pb = Probiotic(
         name        ='MadeUp',
         microbes    = [bl, bb, blong, ba]
     )
