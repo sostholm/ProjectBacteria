@@ -6,7 +6,7 @@ from mongoengine    import (
 
 
 class Microbe(Document):
-    meta        = {'collection': 'bacteria'}
+    meta        = {'collection': 'microbes'}
     m_type      = StringField()
     species     = StringField()
     subspecies  = StringField()
@@ -16,4 +16,4 @@ class Microbe(Document):
 class Probiotic(Document):
     meta = {'collection': 'probiotic'}
     name = StringField()
-    bacteria = ListField(ReferenceField(Microbe))
+    microbes = ListField(ReferenceField(Microbe))

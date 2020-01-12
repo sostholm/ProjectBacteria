@@ -2,7 +2,7 @@ from mongoengine import connect
 
 from models import Microbe, Probiotic
 
-connect('ProjectProbiotic', host='mongomock://mongo', alias='default')
+connect('ProjectProbiotic', host='mongomock://pine64', alias='default')
 
 def init_db():
     microbe = Microbe(name="Microbe")
@@ -17,21 +17,31 @@ def init_db():
         subspecies  ='Lactis'
     )
 
-    bl = Microbe(
+    bb = Microbe(
         m_type      ='bacteria',
         species     ='Bifidobacterium',
         subspecies  ='Breve'
     )
 
-    bl = Microbe(
+    blong = Microbe(
         m_type      ='bacteria',
         species     ='Bifidobacterium',
         subspecies  ='Longum'
     )
-
-    bl = Microbe(
+    
+    ba = Microbe(
         m_type      ='bacteria',
         species     ='Lactobacillus',
         subspecies  ='Acidophilus'
     )
 
+    bl.save()
+    bb.save()
+    blong.save()
+    ba.save()
+
+    pb = Microbe(
+        name        ='MadeUp',
+        microbes    = [bl, bb, blong, ba]
+    )
+    pb.save()

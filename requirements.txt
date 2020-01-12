@@ -1,0 +1,5 @@
+starlette
+mongoengine
+graphene
+graphene_mongo
+uvicorn
