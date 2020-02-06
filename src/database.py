@@ -6,25 +6,25 @@ connect('ProjectProbiotic', host='mongodb://pine64:27017')
 
 def init_db():
     bl = Microbe(
-        m_type      ='bacteria',
+        domain      ='Bacteria',
         species     ='Bifidobacterium',
         subspecies  ='Lactis'
     )
 
     bb = Microbe(
-        m_type      ='bacteria',
+        domain      ='Bacteria',
         species     ='Bifidobacterium',
         subspecies  ='Breve'
     )
 
     blong = Microbe(
-        m_type      ='bacteria',
+        domain      ='Bacteria',
         species     ='Bifidobacterium',
         subspecies  ='Longum'
     )
     
     ba = Microbe(
-        m_type      ='bacteria',
+        domain      ='Bacteria',
         species     ='Lactobacillus',
         subspecies  ='Acidophilus'
     )
