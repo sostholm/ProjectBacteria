@@ -42,14 +42,42 @@ class AddMicrobe(graphene.Mutation):
         bl.save()
         return AddMicrobe(microbe=bl)
 
+class AddProbiotic(graphene.Mutation):
+    class Arguments:
+        name = graphene.String()
+
+    probiotic = graphene.Field(Probiotic)
+
+    @staticmethod
+    def mutate(root, info, name):
+        pb = ProbioticModel(name=name)
+        pb.save()
+        return AddProbiotic(probiotic=pb)
+
+class UpdateProbiotic(graphene.Mutation):
+    class Arguments:
+        _id = graphene.String()
+        microbe_ids = graphene.List(graphene.String)
+
+    probiotic = graphene.Field(Probiotic)
+
+    @staticmethod
+    def mutate(root, info, _id, microbe_ids):
+        pb = ProbioticModel.objects(id=_id).first()
+        for m_id in microbe_ids:
+            pb.microbes.append(MicrobeModel.objects(id=m_id).first())
+        pb.save()
+        return AddProbiotic(probiotic=pb)
+
 class Query(graphene.ObjectType):
     node = Node.Field()
     all_microbes = MongoengineConnectionField(Microbe)
     all_Probiotics = MongoengineConnectionField(Probiotic)
 
 class Mutation(graphene.ObjectType):
-
         add_microbe = AddMicrobe.Field()
+        add_probiotic = AddProbiotic.Field()
+        update_probiotic = AddProbiotic.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation, types=[Microbe, Probiotic])
     
