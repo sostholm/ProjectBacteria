@@ -1,0 +1,70 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type AddMicrobe {
+  microbe: Microbe
+}
+
+type AddProbiotic {
+  probiotic: Probiotic
+}
+
+type Microbe implements Node {
+  domain: String
+  id: ID!
+  species: String!
+  strain: String
+  subspecies: String!
+  fullName: String
+}
+
+type MicrobeConnection {
+  pageInfo: PageInfo!
+  edges: [MicrobeEdge]!
+}
+
+type MicrobeEdge {
+  node: Microbe
+  cursor: String!
+}
+
+type Mutation {
+  addMicrobe(domain: String!, species: String!, strain: String, subspecies: String!): AddMicrobe
+  addProbiotic(name: String): AddProbiotic
+  updateProbiotic(name: String): AddProbiotic
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Probiotic implements Node {
+  id: ID!
+  microbes(before: String, after: String, first: Int, last: Int, domain: String, id: ID, species: String, strain: String, subspecies: String): MicrobeConnection
+  name: String!
+}
+
+type ProbioticConnection {
+  pageInfo: PageInfo!
+  edges: [ProbioticEdge]!
+}
+
+type ProbioticEdge {
+  node: Probiotic
+  cursor: String!
+}
+
+type Query {
+  node(id: ID!): Node
+  allMicrobes(before: String, after: String, first: Int, last: Int, domain: String, id: ID, species: String, strain: String, subspecies: String): MicrobeConnection
+  allProbiotics(before: String, after: String, first: Int, last: Int, id: ID, name: String): ProbioticConnection
+}

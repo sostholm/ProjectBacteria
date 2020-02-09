@@ -5,6 +5,10 @@ from graphene_mongo import MongoengineConnectionField, MongoengineObjectType
 from models import Microbe as MicrobeModel
 from models import Probiotic as ProbioticModel
 
+import json
+import sys
+from graphql.utils import schema_printer
+
 class Microbe(MongoengineObjectType):
     class Meta:
         model = MicrobeModel
@@ -81,3 +85,8 @@ class Mutation(graphene.ObjectType):
 
 schema = graphene.Schema(query=Query, mutation=Mutation, types=[Microbe, Probiotic])
     
+def print_schema():
+    my_schema_str = schema_printer.print_schema(schema)
+    fp = open("schema.graphql", "w")
+    fp.write(my_schema_str)
+    fp.close()

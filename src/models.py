@@ -13,7 +13,6 @@ class Microbe(Document):
     subspecies  = StringField(required=True)
     strain      = StringField(unique_with=['species', 'subspecies'], default='Unknown')
 
-
 class Probiotic(Document):
     meta = {'collection': 'probiotic'}
     name = StringField(required=True, unique=True)

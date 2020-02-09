@@ -6,7 +6,7 @@ from starlette.middleware   import Middleware
 import uvicorn
 
 from database import init_db
-from schema import schema
+from schema import schema, print_schema
 from timermiddleware import TimerMiddleware
 
 
@@ -26,4 +26,5 @@ app = Starlette(debug=True, routes=routes, middleware=middleware)
 
 if __name__ == '__main__':
     # init_db()
+    print_schema()
     uvicorn.run(app, host="0.0.0.0", port=8000)
