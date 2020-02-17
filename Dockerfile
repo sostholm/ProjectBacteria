@@ -1,15 +1,11 @@
-FROM python:alpine
+FROM python:latest
 
 COPY ./src/ /app/
 COPY requirements.txt /app/
 
 WORKDIR app
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends gcc and-build-dependencies \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip install cryptography \
-    && apt-get purge -y --auto-remove gcc and-build-dependencies
+RUN apt-get update 
 
 RUN pip install -r requirements.txt
 
