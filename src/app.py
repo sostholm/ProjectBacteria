@@ -3,6 +3,7 @@ from starlette.responses    import JSONResponse
 from starlette.routing      import Route
 from starlette.graphql      import GraphQLApp
 from starlette.middleware   import Middleware
+from starlette.middleware.cors import CORSMiddleware
 import uvicorn
 
 from database import init_db
@@ -19,7 +20,8 @@ routes = [
     ]
 
 middleware = [
-    Middleware(TimerMiddleware)
+    Middleware(TimerMiddleware),
+    Middleware(CORSMiddleware, allow_origins=['*'], allow_methods=[*], allow_headers=[*])
 ]
 
 app = Starlette(debug=True, routes=routes, middleware=middleware)
