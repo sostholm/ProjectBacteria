@@ -21,7 +21,7 @@ routes = [
 
 middleware = [
     Middleware(TimerMiddleware),
-    Middleware(CORSMiddleware, allow_origins=['*'], allow_methods=[*], allow_headers=[*])
+    Middleware(CORSMiddleware, allow_origins=['*'], allow_methods=['*'], allow_headers=['*'])
 ]
 
 app = Starlette(debug=True, routes=routes, middleware=middleware)
