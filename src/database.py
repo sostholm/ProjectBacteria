@@ -3,7 +3,8 @@ import os
 
 from models import Microbe, Probiotic
 
-connect('ProjectProbiotic', host=f'mongodb://{os.environ["mongo-db"]}:27017')
+#connect('ProjectProbiotic', host=f'mongodb://{os.environ["mongo-db"]}:27017')
+connect('ProjectProbiotic', host=f'mongodb://pine64:27017')
 
 def init_db():
     bl = Microbe(

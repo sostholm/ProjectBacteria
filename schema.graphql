@@ -67,4 +67,7 @@ type Query {
   node(id: ID!): Node
   allMicrobes(before: String, after: String, first: Int, last: Int, domain: String, id: ID, species: String, strain: String, subspecies: String): MicrobeConnection
   allProbiotics(before: String, after: String, first: Int, last: Int, id: ID, name: String): ProbioticConnection
+  search(q: String): [SearchResult]
 }
+
+union SearchResult = Microbe | Probiotic

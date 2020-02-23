@@ -25,6 +25,10 @@ class Probiotic(MongoengineObjectType):
         model = ProbioticModel
         interfaces = (Node,)
 
+class SearchResult(graphene.Union):
+    class Meta:
+        types = (Microbe, Probiotic)
+
 class AddMicrobe(graphene.Mutation):
 
     class Input:
@@ -77,6 +81,11 @@ class Query(graphene.ObjectType):
     node = Node.Field()
     all_microbes = MongoengineConnectionField(Microbe)
     all_Probiotics = MongoengineConnectionField(Probiotic)
+    search = graphene.List(SearchResult, q=graphene.String())
+
+    def resolve_search(self, info, **args):
+        q = args.get("q")
+        
 
 class Mutation(graphene.ObjectType):
         add_microbe = AddMicrobe.Field()
