@@ -85,6 +85,8 @@ class Query(graphene.ObjectType):
 
     def resolve_search(self, info, **args):
         q = args.get("q")
+        microbes = MicrobeModel.objects(species__contains=q).all()
+        return microbes
         
 
 class Mutation(graphene.ObjectType):
@@ -92,7 +94,7 @@ class Mutation(graphene.ObjectType):
         add_probiotic = AddProbiotic.Field()
         update_probiotic = AddProbiotic.Field()
 
-schema = graphene.Schema(query=Query, mutation=Mutation, types=[Microbe, Probiotic])
+schema = graphene.Schema(query=Query, mutation=Mutation, types=[Microbe, Probiotic, SearchResult])
     
 def print_schema():
     my_schema_str = schema_printer.print_schema(schema)
